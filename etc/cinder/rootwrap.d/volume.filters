@@ -55,6 +55,13 @@ chmod: CommandFilter, /bin/chmod, root
 rm: CommandFilter, /bin/rm, root
 lvs: CommandFilter, /sbin/lvs, root
 
+# cinder/volume/nfsvolume.py
+mkfs: CommandFilter, /sbin/mkfs, root
+exportfs: CommandFilter, /usr/sbin/exportfs, root
+mkdir: CommandFilter, /bin/mkdir, root
+rmdir: CommandFilter, /bin/rmdir, root
+umount: CommandFilter, /bin/umount, root
+
 # cinder/volume/scality.py
 mount: CommandFilter, /bin/mount, root
 dd: CommandFilter, /bin/dd, root
