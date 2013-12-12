@@ -51,7 +51,7 @@ volume_opts = [
                default='/vol',
                help='Root directory used to mount filesystem on LVM volumes.'),
     cfg.StrOpt('volume_mount_opts',
-               default='nouuid',
+               default=None,
                help='Options for mounting local filesystem'),
     cfg.StrOpt('volume_filesystem',
                default='ext3',
@@ -197,6 +197,19 @@ class LVMNFSDriver(lvm.LVMVolumeDriver):
                 LOG.info(_("Mount point is not existed, ignored."))
             else:
                 raise
+
+    def initialize_connection(self, volume, connector):
+        """Allow connection to connector and return connection info."""
+        data = {'export': volume['provider_location'],
+                'name': volume['name']}
+        return {
+            'driver_volume_type': 'nfs',
+            'data': data
+        }
+
+    def terminate_connection(self, volume, connector, **kwargs):
+        """Disallow connection from connector"""
+        pass
 
     def get_volume_stats(self, refresh=False):
         """Get volume status.
