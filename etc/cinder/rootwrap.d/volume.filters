@@ -65,6 +65,13 @@ rm: CommandFilter, rm, root
 lvs: CommandFilter, lvs, root
 find: CommandFilter, find, root
 
+# cinder/volume/nfsvolume.py
+mkfs: CommandFilter, mkfs, root
+exportfs: CommandFilter, exportfs, root
+mkdir: CommandFilter, mkdir, root
+rmdir: CommandFilter, rmdir, root
+umount: CommandFilter, umount, root
+
 # cinder/volume/drivers/glusterfs.py
 mv: CommandFilter, mv, root
 
