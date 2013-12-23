@@ -245,15 +245,16 @@ class NetAppDirectNfsVolumeDriver(driver.VolumeDriver):
         nfs_export.add_child_elem(rule)
         rule_info = NaElement.create_node_with_children(
             'exports-rule-info',
-            **{'pathname': '/vol/%s' % (name)})
+            **{'pathname': '/vol/%s' % (name),
+               'anon': '0'})
         rw = NaElement('read-write')
         #root = NaElement('root')
         rw.add_node_with_children(
                 'exports-hostname-info',
-                **{'name': '*'})
+                **{'all-hosts': 'true'})
         #root.add_node_with_children(
         #        'exports-hostname-info',
-        #        **{'name': '*'})
+        #        **{'all-hosts': 'true'})
         rule_info.add_child_elem(rw)
         #rule_info.add_child_elem(root)
         rule.add_child_elem(rule_info)
