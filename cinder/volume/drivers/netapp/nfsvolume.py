@@ -264,13 +264,15 @@ class NetAppDirectNfsVolumeDriver(driver.VolumeDriver):
     def ensure_export(self, context, volume):
         """Driver entry point to get the export info for an existing volume."""
         self._do_export(volume, True)
-        handle = self._get_volume_attr(volume['name'], 'handle')
+        name = self._get_na_name(volume['name'])
+        handle = self._get_volume_attr(name, 'handle')
         return {'provider_location': handle}
 
     def create_export(self, context, volume):
         """Driver entry point to get the export info for a new volume."""
         self._do_export(volume)
-        handle = self._get_volume_attr(volume['name'], 'handle')
+        name = self._get_na_name(volume['name'])
+        handle = self._get_volume_attr(name, 'handle')
         return {'provider_location': handle}
 
     def remove_export(self, context, volume):
