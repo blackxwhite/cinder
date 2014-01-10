@@ -51,23 +51,22 @@ NEXENTA_NFSVOLUME_OPTIONS = [
 
 CONF = cfg.CONF
 CONF.register_opts(options.NEXENTA_CONNECTION_OPTIONS)
-CONF.register_opts(options.NEXENTA_NFSVOLUME_OPTIONS)
+CONF.register_opts(NEXENTA_NFSVOLUME_OPTIONS)
 
 
-class NexentaNFSDriver(driver.VolumeDriver):  # pylint: disable=R0921
+class NexentaNfsVolumeDriver(driver.VolumeDriver):  # pylint: disable=R0921
     """Executes volume driver commands on Nexenta Appliance."""
 
     VERSION = '1.0.0'
 
     def __init__(self, *args, **kwargs):
-        super(NexentaNFSDriver, self).__init__(*args, **kwargs)
-        self.configuration.append_config_values(nexenta_opts)
+        super(NexentaNfsVolumeDriver, self).__init__(*args, **kwargs)
         self.nms = None
         if self.configuration:
             self.configuration.append_config_values(
                 options.NEXENTA_CONNECTION_OPTIONS)
             self.configuration.append_config_values(
-                options.NEXENTA_NFSVOLUME_OPTIONS)
+                NEXENTA_NFSVOLUME_OPTIONS)
 
     def do_setup(self, context):
         protocol = self.configuration.nexenta_rest_protocol
